@@ -5,50 +5,81 @@ import VueCookies from 'vue-cookies';
 <template>
     <div v-if="datiRicevuti != null" class="container" style="margin-top: 10vh;">
         <div class="row row-cols-1 row-cols-xl-2 g-2">
-
             <div class="col">
-
-                <img :src="datiRicevuti[productIndex].foto" style="width: 40vh;"/>
-            
+                <img :src="datiRicevuti[productIndex].foto" style="width: 40vh;" />
             </div>
             <div class="col" style="text-align: left;">
+                <h1>{{ datiRicevuti[productIndex].Nome }}</h1>
 
-                <h1>{{datiRicevuti[productIndex].Nome}}</h1>
+                <br />
 
-                <br/>
+                <h5 style="color:white;">Valutazione: {{ datiRicevuti[productIndex].valutazione }}/5</h5>
 
-                <h5 style="color:white;">Valutazione: {{datiRicevuti[productIndex].valutazione}}/5</h5>
+                <br />
 
-                <br/>
+                <h4 style="color:white; font-weight: bold">€{{ datiRicevuti[productIndex].prezzo }}</h4>
 
-                <h4 style="color:white; font-weight: bold">€{{datiRicevuti[productIndex].prezzo}}</h4>
+                <br />
 
-                <br/>
-                
-                <p style="font-weight:500; color:white;">{{datiRicevuti[productIndex].descrizione}}</p>
-                <button type="button" class="btn btn-warning" @click="addCarello" id="liveToastBtn">Aggiungi al carello</button>
-            
+                <p style="font-weight:500; color:white;">{{ datiRicevuti[productIndex].descrizione }}</p>
+                <button
+                    type="button"
+                    class="btn btn-warning"
+                    @click="addCarello"
+                    id="liveToastBtn"
+                >Aggiungi al carello</button>
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button
+                                class="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseOne"
+                                aria-expanded="false"
+                                aria-controls="flush-collapseOne"
+                            >Maggiori Dettagli</button>
+                        </h2>
+                        <div
+                            id="flush-collapseOne"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingOne"
+                            data-bs-parent="#accordionFlushExample"
+                        >
+                            <div class="accordion-body">
+                               -deepExtend<br>
+                               -sdffsf<br>
+                               -dfvdfv
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
     <div v-else style="padding-top: 50%;">
         <h1 style="font-size:medium;">🚧Stiamo caricando il prodotto🚧</h1>
         <div class="progress" style="width: 100%!important;">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
+            <div
+                class="progress-bar progress-bar-striped progress-bar-animated"
+                role="progressbar"
+                style="width: 100%"
+            ></div>
         </div>
     </div>
 
-
-
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="liveToast" class="toast fade hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div
+            id="liveToast"
+            class="toast fade hide"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+        >
             <div class="toast-body">Prodotto aggiunto al carrello</div>
         </div>
     </div>
-
-
-
 </template>
 
 <script>
@@ -66,17 +97,17 @@ export default {
         const data = await response.json();
         this.datiRicevuti = data;
         this.productIndex = window.location.href.split("?")[1].split(" ")[0];
-        
+
     },
     methods: {
         addCarello(event) {
             const thisProd = this.productIndex
 
-            if($cookies.get("Carello") == null){
-                $cookies.set("Carello", JSON.stringify([{id: thisProd}]), "10y")
-            }else{
+            if ($cookies.get("Carello") == null) {
+                $cookies.set("Carello", JSON.stringify([{ id: thisProd }]), "10y")
+            } else {
                 let cart = JSON.parse($cookies.get("Carello"));
-                cart.push({id: thisProd});
+                cart.push({ id: thisProd });
                 $cookies.set("Carello", JSON.stringify(cart), "10y")
                 console.log(JSON.parse($cookies.get("Carello")))
             }
@@ -92,5 +123,4 @@ export default {
 </script>
 
 <style>
-
 </style>
