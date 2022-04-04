@@ -48,7 +48,7 @@ import VueCookies from 'vue-cookies';
                             data-bs-parent="#accordionFlushExample"
                         >
                             <div class="accordion-body">
-                               -deepExtend<br>
+                               -dettaglii<br>
                                -sdffsf<br>
                                -dfvdfv
                             </div>
