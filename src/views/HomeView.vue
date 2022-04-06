@@ -6,7 +6,7 @@ import ProductCard from '../components/ProductCard.vue'
 <template>
     <div class="container">
       <br>
-      <h1>Benvenuto in MangaShop!</h1>
+      <h1>Benvenuto in MangaShop!!</h1>
     
       <div v-if="datiRicevuti != null">
 
